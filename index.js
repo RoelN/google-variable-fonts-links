@@ -1,3 +1,11 @@
+/**
+ *
+ * Get Google Fonts URL for all variable axes
+ *
+ * Author: Roel Nieskens <roel@pixelambacht.nl>
+ *
+ */
+
 const fetch = require("node-fetch");
 
 const fontURL = "https://fonts.google.com/metadata/fonts";
@@ -71,7 +79,10 @@ const constructURLs = (fonts) => {
 
 		fontURL.push(endURL);
 
-		URLs.push(fontURL.join(""));
+		URLs.push({
+			family: font.family,
+			url: fontURL.join("")
+		});
 	}
 	return URLs;
 };
