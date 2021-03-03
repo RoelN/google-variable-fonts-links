@@ -20,8 +20,8 @@ fetch(fontURL)
 		console.log(allURLs);
 	});
 
-// Original JSON is invalid as it contains garbage
-// on the first line, so clean up and parse
+// Original JSON is invalid as it contains garbage on the first line, so clean
+// up and parse
 const parseJSON = (json) => {
 	let lines = json.split("\n");
 	lines.splice(0, 1);
@@ -44,13 +44,7 @@ const constructURLs = (fonts) => {
 		const axes = getAllAxes(font);
 		const ital = hasItal(font);
 
-		// Add font family
-		let fontURL = [];
-		fontURL.push(startURL);
-		fontURL.push(encodeURI(font.family));
-		fontURL.push(":");
-
-		// Add axes
+		// Get axes
 		let axisNames = [];
 		let axisValues = [];
 		for (const axis of axes) {
@@ -58,31 +52,38 @@ const constructURLs = (fonts) => {
 			axisValues.push(`${axis.min}..${axis.max}`);
 		}
 
-		// Since `ital` is not listed as an axis, add
-		// it manually
-		if (ital) {
-			fontURL.push("ital,");
-		}
+		// Add regular font family, optinally italic
+		let fontURL = [];
+		fontURL.push(startURL);
+		fontURL.push(encodeURI(font.family));
+		fontURL.push(":");
+		let italicFontURL = [...fontURL];
 
+		// Regular
 		fontURL.push(axisNames.join(","));
 		fontURL.push("@");
-
-		// For fonts with `ital`, list other axes twice,
-		// once for regular and once for italic
-		if (ital) {
-			fontURL.push("0,");
-			fontURL.push(axisValues.join(","));
-			fontURL.push(";1,");
-		}
-
 		fontURL.push(axisValues.join(","));
-
 		fontURL.push(endURL);
 
 		URLs.push({
 			family: font.family,
-			url: fontURL.join("")
+			url: fontURL.join(""),
 		});
+
+		// Italic
+		if (ital) {
+			italicFontURL.push("ital,");
+			italicFontURL.push(axisNames.join(","));
+			italicFontURL.push("@");
+			italicFontURL.push("1,");
+			italicFontURL.push(axisValues.join(","));
+			italicFontURL.push(endURL);
+
+			URLs.push({
+				family: `${font.family} Italic`,
+				url: italicFontURL.join(""),
+			});
+		}
 	}
 	return URLs;
 };
@@ -91,9 +92,9 @@ const constructURLs = (fonts) => {
 const getAllAxes = (font) => {
 	const allUnsortedAxes = [...font.axes, ...font.unsupportedAxes];
 
-	// Google says: "Axes must be listed alphabetically (e.g. a,b,c,A,B,C)"
-	// Which isn't technically alphabetically as A should come before a.
-	// So split lowercase axes and uppercase axes.
+	// Google says: "Axes must be listed alphabetically (e.g. a,b,c,A,B,C)".
+	// Which isn't technically alphabetically as A should come before a. So split
+	// lowercase axes and uppercase axes.
 	let lowercaseAxes = [];
 	let uppercaseAxes = [];
 	for (const axis of allUnsortedAxes) {
@@ -109,9 +110,8 @@ const getAllAxes = (font) => {
 	return [...lowercaseAxes, ...uppercaseAxes];
 };
 
-// The JSON doesn't list `ital` as an axis, so we have
-// to deduct this from the `fonts` data (e.g. see if
-// styles ending with "i" are present, like "400i")
+// The JSON doesn't list `ital` as an axis, so we have to deduct this from the
+// `fonts` data (e.g. see if styles ending with "i" are present, like "400i")
 const hasItal = (font) => {
 	const italicFonts = Object.keys(font.fonts).filter((f) => f.endsWith("i"));
 	return italicFonts.length > 0;
