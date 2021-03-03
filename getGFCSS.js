@@ -19,7 +19,7 @@ fetch(fontURL)
 		const variableFonts = getVF(json);
 		const cssURLs = constructURLs(variableFonts);
 
-		console.log(cssURLs);
+		console.log(JSON.stringify(cssURLs));
 	});
 
 // Original JSON is invalid as it contains garbage on the first line, so clean
@@ -66,7 +66,10 @@ const constructURLs = (fonts) => {
 		cssURL.push("@");
 		cssURL.push(axisValues.join(","));
 		cssURL.push(endURL);
-		URLs[font.family] = cssURL.join("");
+		URLs[font.family] = {
+			css: cssURL.join(""),
+			subsets: font.subsets.filter((s) => s !== "menu"),
+		};
 
 		// Italic
 		if (ital) {
@@ -76,7 +79,10 @@ const constructURLs = (fonts) => {
 			italicCssURL.push("1,");
 			italicCssURL.push(axisValues.join(","));
 			italicCssURL.push(endURL);
-			URLs[`${font.family} Italic`] = italicCssURL.join("");
+			URLs[`${font.family} Italic`] = {
+				css: italicCssURL.join(""),
+				subsets: font.subsets.filter((s) => s !== "menu"),
+			};
 		}
 	}
 	return URLs;
