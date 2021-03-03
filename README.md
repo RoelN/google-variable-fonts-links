@@ -15,3 +15,9 @@ $ node getGFCSS.js
 ```
 
 This will output the links to the CSS files for each font as a simple key/value set.
+
+## How to get the fonts
+
+Use the output from `getGFCSS.js` to get the URL for your favorite font's CSS. Fetch the CSS with a browser, as Node doesn't work. Presumably because a proper user agent string is missing from a Node request, you'll get a garbage CSS file with links to .ttf files.
+
+Then parse the link you want from the returned CSS, and fetch the font file! An example for this can be found in `index.html`.
