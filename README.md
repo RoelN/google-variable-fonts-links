@@ -11,5 +11,7 @@ Because Google Fonts does not yet disclose all axes in their web interface. So y
 Keep putting one leg in front of the other really fast. Haha! Anyway, how to run _the script:_
 
 ```bash
-$ node index.js
+$ node getGFCSS.js
 ```
+
+This will output the links to the CSS files for each font as a simple key/value set.

@@ -2,6 +2,8 @@
  *
  * Get Google Fonts URL for all variable axes
  *
+ * Doing this via Node to circumvent CORS stuff.
+ *
  * Author: Roel Nieskens <roel@pixelambacht.nl>
  *
  */
@@ -17,7 +19,7 @@ fetch(fontURL)
 		const variableFonts = getVF(json);
 		const cssURLs = constructURLs(variableFonts);
 
-		console.log(cssURLs["Fraunces"]);
+		console.log(cssURLs);
 	});
 
 // Original JSON is invalid as it contains garbage on the first line, so clean
