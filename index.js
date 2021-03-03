@@ -15,9 +15,9 @@ fetch(fontURL)
 	.then((originalJSON) => {
 		const json = parseJSON(originalJSON);
 		const variableFonts = getVF(json);
-		const allURLs = constructURLs(variableFonts);
+		const cssURLs = constructURLs(variableFonts);
 
-		console.log(allURLs);
+		console.log(cssURLs["Fraunces"]);
 	});
 
 // Original JSON is invalid as it contains garbage on the first line, so clean
@@ -38,7 +38,7 @@ const constructURLs = (fonts) => {
 	const startURL = "https://fonts.googleapis.com/css2?family=";
 	const endURL = "&display=block";
 
-	let URLs = [];
+	let URLs = {};
 
 	for (const font of fonts) {
 		const axes = getAllAxes(font);
@@ -53,36 +53,28 @@ const constructURLs = (fonts) => {
 		}
 
 		// Add regular font family, optinally italic
-		let fontURL = [];
-		fontURL.push(startURL);
-		fontURL.push(encodeURI(font.family));
-		fontURL.push(":");
-		let italicFontURL = [...fontURL];
+		let cssURL = [];
+		cssURL.push(startURL);
+		cssURL.push(encodeURI(font.family));
+		cssURL.push(":");
+		let italicCssURL = [...cssURL];
 
 		// Regular
-		fontURL.push(axisNames.join(","));
-		fontURL.push("@");
-		fontURL.push(axisValues.join(","));
-		fontURL.push(endURL);
-
-		URLs.push({
-			family: font.family,
-			url: fontURL.join(""),
-		});
+		cssURL.push(axisNames.join(","));
+		cssURL.push("@");
+		cssURL.push(axisValues.join(","));
+		cssURL.push(endURL);
+		URLs[font.family] = cssURL.join("");
 
 		// Italic
 		if (ital) {
-			italicFontURL.push("ital,");
-			italicFontURL.push(axisNames.join(","));
-			italicFontURL.push("@");
-			italicFontURL.push("1,");
-			italicFontURL.push(axisValues.join(","));
-			italicFontURL.push(endURL);
-
-			URLs.push({
-				family: `${font.family} Italic`,
-				url: italicFontURL.join(""),
-			});
+			italicCssURL.push("ital,");
+			italicCssURL.push(axisNames.join(","));
+			italicCssURL.push("@");
+			italicCssURL.push("1,");
+			italicCssURL.push(axisValues.join(","));
+			italicCssURL.push(endURL);
+			URLs[`${font.family} Italic`] = italicCssURL.join("");
 		}
 	}
 	return URLs;
