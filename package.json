@@ -1,13 +1,13 @@
 {
-  "name": "variable-google-fonts",
+  "name": "google-variable-fonts-links",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "getGFCSS.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Roel Nieskens",
+  "license": "Apache 2.0",
   "dependencies": {
     "node-fetch": "^2.6.1"
   }
