@@ -1136,7 +1136,7 @@
 		<div>
 			<h2></h2>
 			<strong></strong>
-			<p></p>
+			<!-- <p></p> -->
 		</div>
 	</template>
 
@@ -1154,13 +1154,13 @@
 					el.querySelector("h2").innerText = font;
 					el.querySelector("strong").innerText = fonts[font].css;
 
-					const links = parseFontLinks(css);
-					for (const link in links) {
-						el.querySelector("p").innerHTML =
-							el.querySelector("p").innerHTML +
-							link + ": " + links[link] +
-							"<br>";
-					}
+					// const links = parseFontLinks(css);
+					// for (const link in links) {
+					// 	el.querySelector("p").innerHTML =
+					// 		el.querySelector("p").innerHTML +
+					// 		link + ": " + links[link] +
+					// 		"<br>";
+					// }
 
 					body.append(el);
 				});
