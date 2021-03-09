@@ -63,7 +63,7 @@ This will output the links to the CSS files for each font as a simple key/value 
 
 Use the output from `getGFCSS.js` to get the URL for your favorite font's CSS. Fetch the CSS with a browser as Node doesn't work, presumably because a proper user agent string is missing from a Node request so you'll get a garbage CSS file with duplicated links to .ttf files.
 
-Then parse the font URL you need from the returned CSS, and fetch the font file! An example for this can be found in `index.html`. If you'd like to get the `Vietnamese` subset of `Fraunces`, the returned URL will be something like `https://fonts.gstatic.com/s/fraunces/v7/6NUV8FyLNQOQZAnv9ZwHlOkuy91BRtw.woff2`.
+Then parse the font URL you need from the returned CSS, and fetch the font file! An example for this can be found in `index.html`. If you'd like to get the `Vietnamese` subset of `Fraunces`, the returned URL will be something like `https://fonts.gstatic.com/s/fraunces/v7/6NUV8FyLNQOQZAnv9ZwHlOkuy91BRtw.woff2`. Note that the links to the fonts are for demonstration/debugging purposes onky and shouldn't be used directly. They are specifically generated for your browser/OS, and are prone to change!
 
 ## A note on subsets
 
