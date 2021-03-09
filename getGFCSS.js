@@ -19,7 +19,7 @@ fetch(fontURL)
 		const variableFonts = getVF(json);
 		const cssURLs = constructURLs(variableFonts);
 
-		console.log(JSON.stringify(cssURLs));
+		console.log(JSON.stringify(cssURLs, null, 4));
 	});
 
 // Original JSON is invalid as it contains garbage on the first line, so clean

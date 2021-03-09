@@ -2,6 +2,8 @@
 
 This is a sophisticated high-tech tool to construct links to the full variable fonts available on Google Fonts.
 
+See the [full list in your browser!](pixelambacht.nl/google-variable-fonts-links/)
+
 ## Why?
 
 Because Google Fonts does not yet disclose all axes in their web interface. So you have to hand-craft the correct URL to get a font with all the axes, which takes an amount of brainpower currently simply not available to mankind.
