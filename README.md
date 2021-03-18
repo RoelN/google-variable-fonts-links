@@ -2,7 +2,7 @@
 
 This is a sophisticated high-tech tool to construct links to the full variable fonts available on Google Fonts.
 
-See the [full list in your browser!](pixelambacht.nl/google-variable-fonts-links/)
+See the [full list in your browser!](https://pixelambacht.nl/google-variable-fonts-links/)
 
 ## Why?
 
